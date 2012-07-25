@@ -18,14 +18,14 @@ public class ClienteCalc {
     public static void main(String args[]) {
         int port = 1234;
         try {
-            Socket skt = new Socket("192.168.1.2", port);
+            Socket skt = new Socket("localhost", port);
             PrintWriter out = new PrintWriter( skt.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
             
             System.out.print("Received message: " + in.readLine());
             System.out.println("Sending name...");
             
-            out.println("2 / 5");
+            out.println("4 / 2");
             
             System.out.println("The result is: " + in.readLine());
             in.close();     

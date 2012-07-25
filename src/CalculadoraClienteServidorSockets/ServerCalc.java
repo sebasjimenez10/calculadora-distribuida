@@ -26,7 +26,7 @@ public class ServerCalc {
                 System.out.print("Server has connected!\n");
                 PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-                out.println("Please right your math operation. (eg. 1 / 3). Remeber the white spaces.");
+                out.println("Please write your math operation. (eg. 1 / 3). Remeber the white spaces.");
                 
                 String str = in.readLine();
                 String content[] = str.split(" ");
