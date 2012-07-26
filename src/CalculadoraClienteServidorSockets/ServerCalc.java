@@ -19,7 +19,7 @@ public class ServerCalc {
     public static void main(String args[]) {
         int port = 1234;
         try {
-            ServerSocket srvr = new ServerSocket(1234);
+            ServerSocket srvr = new ServerSocket( port );
             System.out.println("Server created, waiting for connections...");
             while (true) {
                 Socket skt = srvr.accept();
