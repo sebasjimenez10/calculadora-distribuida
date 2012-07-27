@@ -1,6 +1,10 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Topicos Esp. en Telematica
+ * Reto # 1.
+ * Integrantes: Johanna Lozano, David Sttivend, Sebastian Jimenez.
+ * 
+ * Descripcion: Calculadora Distribuida. ClienteCalc class
+ * 
  */
 package CalculadoraClienteServidorSockets;
 
@@ -11,30 +15,47 @@ import java.net.Socket;
 
 /**
  *
- * @author Menes
+ * @author The Lentidudes
  */
 public class ClienteCalc {
 
     public static void main(String args[]) {
+        //Port and host to stablish connection
+        String host = "localhost";
         int port = 1234;
         try {
-            Socket skt = new Socket("localhost", port);
-            PrintWriter out = new PrintWriter( skt.getOutputStream(), true);
+            //Creates the socket with the host and port variables
+            Socket skt = new Socket(host, port);
+
+            //Creates the socket streams
+            PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-            
-            System.out.print("Received message: " + in.readLine());
-            System.out.println("Sending name...");
-            
-            out.println("4 / 2");
-            
-            System.out.println("The result is: " + in.readLine());
-            in.close();     
-            out.close();
-            skt.close();
-            
+            BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
+
+            //Getting de received message
+            System.out.println("Received message: " + in.readLine());
+            System.out.println("Type operation or exit to disconnect from server");
+
+            //Send back users input
+            String response = userIn.readLine();
+            if (response.equalsIgnoreCase("exit")) {
+                System.out.println("---Connection closed---");
+                out.println(response);
+                skt.close();
+            } else {
+                out.println(response);
+
+                //Getting the operation result
+                System.out.println("The result is: " + in.readLine());
+
+                //Close the streams and the socket
+                in.close();
+                out.close();
+                skt.close();
+            }
         } catch (Exception e) {
-            System.out.println("Whoops! It didn't work!");
-            System.out.println(e.getMessage());
+            //Get error message
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
