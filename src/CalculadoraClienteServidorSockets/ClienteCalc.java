@@ -55,7 +55,7 @@ public class ClienteCalc {
             }
         } catch (Exception e) {
             //Get error message
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Message: " + e.getMessage());
         }
     }
 }
