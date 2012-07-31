@@ -37,12 +37,6 @@ public class ServerCalc {
                 Socket skt = srvr.accept();
                 System.out.println("Server connected to: " + skt.getInetAddress().getHostAddress().toString());
 
-                //Creates the streams
-                PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
-
-                //Sends message
-                out.println("Please write your math operation. (eg. 10 / 3). Remeber the white spaces.");
-                
                 //Starts calc thread to attend multiple clients
                 Calculadora c = new Calculadora(skt);
                 c.start();
