@@ -1,30 +1,38 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Topicos Esp. en Telematica
+ * Reto # 1.
+ * Integrantes: Johanna Lozano, David Sttivend, Sebastian Jimenez.
+ * 
+ * Descripcion: Calculadora Distribuida.
+ * 
  */
+
 package CalculadoraClienteServidorSockets;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author Johanna
+ * @author The Lentidudes
  */
 public class ClienteUI {
     
     public String showOpciones() throws IOException {
+        //User input
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Menu principal, escoja una opcion.\n"
+        
+        //Shows principal menu
+        System.out.println("Menu principal. Escoja una opcion.\n"
                 + " 1. Hacer operacion\n"
                 + " 2. Salir");
+
+        //Gets the input and cases it
         String opcion = input.readLine();
-        String operacion = "";
+        String operacion = null;
         if (opcion.equalsIgnoreCase("1")) {
             System.out.println("Ingrese la operacion. (ej. 10 * 2)");
             operacion = input.readLine();
@@ -32,23 +40,26 @@ public class ClienteUI {
             operacion = "exit";
         }
         return operacion;
-    }
-    
-   
+    }   
     
     public static void main(String[] args) {
-        
-        int puerto = Integer.parseInt(args[0]);
-        String host = args[1];
-        
-        ClienteUI c = new ClienteUI();
-        ClienteConnection x = new ClienteConnection();
         try {
+            //Input
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            //Initialize the parameters
+            System.out.println("Ingrese el puerto por el cual esta corriendo el server.");
+            int puerto = Integer.parseInt( input.readLine() );
+            System.out.println("Ingrese el host. ej \"localhost\"");
+            String host = input.readLine();
+
+            //Gets the operation and stabilsh connection
+            ClienteUI c = new ClienteUI();
+            ClienteConnection x = new ClienteConnection();
+        
             String operacion = c.showOpciones();
             x.conexion(puerto, host, operacion);
         } catch (IOException ex) {
             Logger.getLogger(ClienteUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }        
     }
 }

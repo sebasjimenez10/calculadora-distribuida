@@ -1,6 +1,10 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Topicos Esp. en Telematica
+ * Reto # 1.
+ * Integrantes: Johanna Lozano, David Sttivend, Sebastian Jimenez.
+ * 
+ * Descripcion: Calculadora Distribuida.
+ * 
  */
 
 package CalculadoraClienteServidorSockets;
@@ -13,53 +17,55 @@ import java.net.Socket;
 
 /**
  *
- * @author sjimen14
+ * @author The Lentidudes
  */
 public class Calculadora extends Thread {
-    
+
+    /**
+     * Attributes
+     */
     Socket skt;
     PrintWriter out;
     BufferedReader in;
-    
-    public Calculadora ( Socket skt ) throws IOException{
+
+    public Calculadora(Socket skt) throws IOException {
         this.skt = skt;
         out = new PrintWriter(skt.getOutputStream(), true);
-        in = new BufferedReader( new InputStreamReader( skt.getInputStream() ) );
+        in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
     }
-    
+
     @Override
     public void run() {
-        try{
-        //Gets the message sent from de client and process it
-        String str = in.readLine();
-        if (str.equalsIgnoreCase("exit")) {
-            System.out.println("---Client disconnected---");
-        } else {
-            String content[] = str.split(" ");
-            float a = Float.parseFloat(content[0]);
-            float b = Float.parseFloat(content[2]);
+        try {
+            //Gets the message sent from de client and process it
+            String str = in.readLine();
+            if (str.equalsIgnoreCase("exit")) {
+                System.out.println("---Client disconnected---");
+            } else {
+                String content[] = str.split(" ");
+                float a = Float.parseFloat(content[0]);
+                float b = Float.parseFloat(content[2]);
 
-            //Math
-            if (content[1].equals("+")) {
-                str = (a + b) + "";
-            } else if (content[1].equals("-")) {
-                str = (a - b) + "";
-            } else if (content[1].equals("*")) {
-                str = (a * b) + "";
-            } else if (content[1].equals("/")) {
-                str = (a / b) + "";
+                //Math
+                if (content[1].equals("+")) {
+                    str = (a + b) + "";
+                } else if (content[1].equals("-")) {
+                    str = (a - b) + "";
+                } else if (content[1].equals("*")) {
+                    str = (a * b) + "";
+                } else if (content[1].equals("/")) {
+                    str = (a / b) + "";
+                }
+                //Send back result
+                out.println(str);
+                System.out.println("Client well attended");
+                //Close the streams and the socket
+                in.close();
+                out.close();
+                skt.close();
             }
-            //Send back result
-            out.println(str);
-            System.out.println("Client well attended");
-            //Close the streams and the socket
-            in.close();
-            out.close();
-            skt.close();
-        }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
 }

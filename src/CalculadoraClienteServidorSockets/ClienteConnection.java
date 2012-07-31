@@ -3,9 +3,10 @@
  * Reto # 1.
  * Integrantes: Johanna Lozano, David Sttivend, Sebastian Jimenez.
  * 
- * Descripcion: Calculadora Distribuida. ClienteCalc class
+ * Descripcion: Calculadora Distribuida.
  * 
  */
+
 package CalculadoraClienteServidorSockets;
 
 import java.io.BufferedReader;
@@ -21,7 +22,7 @@ import java.net.Socket;
 public class ClienteConnection {
 
     public void conexion(int port, String host, String operacion) throws IOException {
-
+        
         //Creates the socket with the host and port variables
         Socket skt = new Socket(host, port);
 
@@ -29,23 +30,22 @@ public class ClienteConnection {
         PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
         
-        //Send back users input
-        
+        //Send back users input        
         if (operacion.equalsIgnoreCase("exit")) {
             System.out.println("---Connection closed---");
             out.println(operacion);
             skt.close();
         } else {
+            //Send operation
             out.println(operacion);
 
             //Getting the operation result
-            System.out.println("The result is: " + in.readLine());
+            System.out.println("El resultado es: " + in.readLine());
 
             //Close the streams and the socket
             in.close();
             out.close();
             skt.close();
         }
-        
     }
 }
