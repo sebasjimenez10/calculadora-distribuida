@@ -4,7 +4,7 @@
  */
 package titanic.gui;
 
-import ch.randelshofer.quaqua.QuaquaLookAndFeel;
+import ch.randelshofer.quaqua.*;
 import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -39,7 +39,7 @@ public class MainTitanicWindow extends javax.swing.JFrame {
         }
     }
     
-    private void setNimbus( String option ){
+    private void setNimbus(String option) {
         // Code from Oracle Docs
         try {
             if (option.equals("Nimbus")) {
@@ -50,11 +50,11 @@ public class MainTitanicWindow extends javax.swing.JFrame {
                     }
                 }
             } else if (option.equals("Quaqua")) {
-                QuaquaLookAndFeel qlf = new QuaquaLookAndFeel();
-                UIManager.setLookAndFeel(qlf);
+                UIManager.setLookAndFeel( ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel() );
             }
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
+            System.out.println(e.getMessage());
         }
     }
 

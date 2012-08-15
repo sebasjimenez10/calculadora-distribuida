@@ -71,13 +71,13 @@ public class WhiteboardPanel extends javax.swing.JPanel {
         addPostItButton.setText("+PostIt");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 4;
         add(addPostItButton, gridBagConstraints);
 
         addImageButton.setText("+Imagen");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 6;
         add(addImageButton, gridBagConstraints);
 
         returnBackLabel.setText("<- Back");
