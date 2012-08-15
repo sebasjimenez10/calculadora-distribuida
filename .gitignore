@@ -1,4 +1,2 @@
 /build/
 /dist/
-/src/*.zip
-!/src/CalculadoraClienteServidorSockets/
